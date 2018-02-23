@@ -1,8 +1,6 @@
 # StatusCheck
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/status_check`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem allows you to check your services with some custom route.
 
 ## Installation
 
@@ -22,7 +20,27 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+To use `status_check` you have to do 2 things:
+
+First - create intializer, where you can define what services you want to be checked.
+Example:
+```ruby
+StatusCheck.configure do |c|
+  c.check(:postgresql, connection: ->{ ActiveRecord::Base.connection })
+  c.check(:redis,      connection: ->{ Redis.new(url: ENV['REDIS_URL']) })
+end
+```
+
+Second - define the route in your `routes.rb` file
+```ruby
+Rails.application.routes.draw do
+  ...
+
+  match 'stats', to: StatusCheck::Router, via: :get
+
+  ...
+end
+```
 
 ## Development
 
@@ -37,3 +55,5 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/[USERN
 ## Code of Conduct
 
 Everyone interacting in the StatusCheck project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/status_check/blob/master/CODE_OF_CONDUCT.md).
+
+Made with love in Matic
