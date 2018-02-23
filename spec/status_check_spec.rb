@@ -1,9 +1,11 @@
-RSpec.describe StatusCheck do
-  it "has a version number" do
-    expect(StatusCheck::VERSION).not_to be nil
-  end
+require 'spec_helper'
 
-  it "does something useful" do
-    expect(false).to eq(true)
+RSpec.describe StatusCheck do
+  let(:connection)        { double "DatabaseConnection", execute: true }
+  let(:connection_lambda) { -> { connection } }
+
+  it 'is configurable' do
+    described_class.configure { |c| c.check(:postgresql, connection: connection_lambda) }
+    expect(described_class.configuration.checks).not_to be_empty
   end
 end

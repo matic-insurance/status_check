@@ -10,6 +10,7 @@ module StatusCheck
 
     def check(service_name, connection:)
       validate_name(service_name)
+
       service = Services.setup(name: service_name, connection: connection)
       @checks << service if service.try[:success]
     end

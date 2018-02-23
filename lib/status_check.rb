@@ -4,6 +4,7 @@ Dir[File.dirname(__FILE__) + '/status_check/services/*.rb'].each {|file| require
 require "status_check/services"
 require "status_check/configuration"
 require "status_check/router"
+require 'json'
 
 module StatusCheck
   class << self
