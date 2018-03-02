@@ -1,5 +1,7 @@
 # StatusCheck
 
+[![Build Status](https://travis-ci.org/matic-insurance/status_check.svg?branch=master)](https://travis-ci.org/matic-insurance/status_check)
+
 This gem allows you to check your services with some custom route.
 
 ## Installation
