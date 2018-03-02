@@ -2,7 +2,12 @@
 
 [![Build Status](https://travis-ci.org/matic-insurance/status_check.svg?branch=master)](https://travis-ci.org/matic-insurance/status_check)
 
-This gem allows you to check your services with some custom route.
+Gem allows easy implementation of a status endpoint in your project. 
+It provides boilerplate code for commonly used components (Database, Redis, etc) 
+and allow usage of your custom status check. 
+
+As a result, the gem can produce hash with a status of every component or be embedded into the routes 
+for an automatic status endpoint. 
 
 ## Installation
 
@@ -20,11 +25,11 @@ Or install it yourself as:
 
     $ gem install status_check
 
-## Usage
+## Quick Usage
 
 To use `status_check` you have to do 2 things:
 
-First - create intializer, where you can define what services you want to be checked.
+First - create initializer, where you can define what services you want to be checked.
 Example:
 ```ruby
 StatusCheck.configure do |c|
@@ -52,10 +57,16 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/status_check. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/matic-insurance/status_check. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## Code of Conduct
 
-Everyone interacting in the StatusCheck project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/status_check/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the StatusCheck project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/matic-insurance/status_check/blob/master/CODE_OF_CONDUCT.md).
+
+## License
+
+[MIT](LICENSE) 
+ 
+## Author Information
 
 Made with love in Matic
