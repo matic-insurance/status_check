@@ -4,14 +4,13 @@ module StatusCheck
 
     SERVICES_MAP = {
       postgresql: Services::Postgresql,
-      redis:      Services::Redis
+      redis: Services::Redis
     }
-    
+
     def check_all
       StatusCheck
         .configuration
-        .checks.map { |service| service.try }
-    rescue
+        .checks.map { |service| service.report_status }
     end
 
     def setup(service)
