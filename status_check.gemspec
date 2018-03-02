@@ -1,17 +1,24 @@
-
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "status_check/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "status_check"
-  spec.version       = StatusCheck::VERSION
-  spec.authors       = ["Vasyl Melnychuk"]
-  spec.email         = ["vasyl.m@matic.com"]
+  spec.name = "status_check"
+  spec.version = StatusCheck::VERSION
+  spec.authors = ["Vasyl Melnychuk", "Volodymyr Mykhailyk"]
+  spec.email = ["vasyl.m@matic.com"]
+  spec.licenses = ['MIT']
 
-  spec.summary       = %q{Check availability of additional services}
-  spec.description   = %q{This gem checks availability of 3rd party services like postgres or redis}
-  spec.homepage      = "https://matic.com"
+  spec.summary = %q{Status endpoint code to verify components availability of your application}
+  spec.description = %q{
+                          Gem allows easy implementation of a status endpoint in your project.
+                          It provides boilerplate code for commonly used components (Database, Redis, etc)
+                          and allow usage of your custom status check.
+
+                          As a result, the gem can produce hash with a status of every component or be embedded into the routes
+                          for an automatic status endpoint.
+                       }
+  spec.homepage = "https://github.com/matic-insurance/status_check"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
@@ -22,11 +29,11 @@ Gem::Specification.new do |spec|
       "public gem pushes."
   end
 
-  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
+  spec.files = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
   end
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.bindir = "exe"
+  spec.executables = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "bundler", "~> 1.16"
