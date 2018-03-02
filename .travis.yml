@@ -5,7 +5,7 @@ rvm:
 install:
   - bin/setup
 script:
-  - bundle exec rake spec
+  - bundle exec rspec
   - gem build status_check
 deploy:
   provider: rubygems
