@@ -2,6 +2,14 @@ sudo: false
 language: ruby
 rvm:
   - 2.4.2
+install:
+  - bin/setup
 script:
+  - bundle exec rake spec
   - gem build status_check
-  - rspec
+deploy:
+  provider: rubygems
+  api_key: "$RUBY_GEMS_API_KEY"
+  on:
+    branch: master
+    tags: true
