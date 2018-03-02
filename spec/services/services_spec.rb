@@ -5,7 +5,7 @@ RSpec.describe StatusCheck::Services do
   let(:connection_lambda) { -> { connection } }
   let(:service_params)    { { name: :postgresql, connection: connection_lambda } }
 
-  it 'can service name to service class' do
+  it 'can map service name to service class' do
     expect(described_class::SERVICES_MAP.keys)
       .to eq([:postgresql, :redis])
   end
