@@ -25,19 +25,6 @@ RSpec.describe StatusCheck::Services::BlockResult do
     end
   end
 
-  describe 'low level error' do
-    let(:status_block) { -> { raise NoMemoryError.new('test') } }
-
-    it 'raises exception' do
-      begin
-        service_response(status_block)
-        expect('not to raise error').to be_falsey
-      rescue NoMemoryError => _
-        expect('to raise error').to be_truthy
-      end
-    end
-  end
-
   protected
 
   def service_response(status_block)

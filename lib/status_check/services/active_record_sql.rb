@@ -1,12 +1,9 @@
 module StatusCheck
   module Services
-    class Postgresql < BaseService
+    class ActiveRecordSql < BaseService
       def command
         connection.call.execute("SELECT 1;")
-      end
-
-      def name
-        :postgresql
+        true
       end
     end
   end
