@@ -12,7 +12,7 @@ module StatusCheck
       validate_name(service_name)
 
       service = Services.setup(name: service_name, connection: connection)
-      @checks << service if service.try[:success]
+      @checks << service
     end
 
     private
