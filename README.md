@@ -33,8 +33,9 @@ First - create initializer, where you can define what services you want to be ch
 Example:
 ```ruby
 StatusCheck.configure do |c|
-  c.check(:postgresql, connection: ->{ ActiveRecord::Base.connection })
-  c.check(:redis,      connection: ->{ Redis.new(url: ENV['REDIS_URL']) })
+  c.check(:my_service, service: StatusCheck::Services::BlockResult, connection: ->{ MyService.is_working? })
+  c.check(:database, service: StatusCheck::Services::ActiveRecordSql, connection: ->{ ActiveRecord::Base.connection })
+  c.check(:redis, service: StatusCheck::Services::ActiveRecordSql, connection: ->{ Redis.new(url: ENV['REDIS_URL']) })
 end
 ```
 
@@ -48,6 +49,51 @@ Rails.application.routes.draw do
   ...
 end
 ```
+
+## Custom usage
+
+You can use status check without routing. In any place of application call:
+```ruby
+success, report = StatusCheck.verify
+puts success # true
+puts report # [{service: 'database', success: true, status: 'OK'}, {service: 'redis', success: true, status: 'OK'}] 
+```
+
+Status check return tuple where first value is boolean (is all services checks are worked) and array of 
+(details for each service)
+
+## Builtin checks
+
+#### ActiveRecordSql
+
+Check connection to sql database configured via ActiveRecord
+
+**class:** `StatusCheck::Services::ActiveRecordSql`
+**connection:** block that returns instance of activerecord db connection. `->{ ActiveRecord::Base.connection }`
+**verification:** verifies if applicaiton can read from database by executing `SELECT 1;`.    
+
+#### Redis
+
+Checks connection to redis
+
+**class:** `StatusCheck::Services::Redis`
+**connection:** block that returns instance of redis. `->{ Redis.new(url: 'redis://redis.com') }`
+**verification:** verifies if application can read from redis by executing `GET 1`.     
+
+#### BlockResult
+
+Checks if connection block returns true or false
+
+**class:** `StatusCheck::Services::BlockResult`
+**connection:** block that returns true or false depending on status. `->{ MyService.is_working? }`
+**verification:** verifies if block returns true or false.   
+
+## Custom checks
+
+There are two ways how you can implement your custom verifications. 
+
+- Implement custom service see `StatusCheck::Services::Abstract`
+- Use BlockResult service and implement verification inside of connection block
 
 ## Development
 
