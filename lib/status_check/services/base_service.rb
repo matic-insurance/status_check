@@ -7,10 +7,6 @@ module StatusCheck
         @connection = connection
       end
 
-      def name
-        raise NotImplementedError, "Name have to be defined"
-      end
-
       def command
         raise NotImplementedError, "Check command have to be defined"
       end
@@ -32,7 +28,6 @@ module StatusCheck
 
       def status_hash(command_result, exception = nil)
         {
-          name: name,
           success: !!command_result,
           status: status_message(command_result, exception)
         }

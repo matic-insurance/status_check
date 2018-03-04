@@ -2,10 +2,6 @@ require 'spec_helper'
 
 RSpec.describe StatusCheck::Services::BaseService do
   class TestService < StatusCheck::Services::BaseService
-    def name
-      'test'
-    end
-
     def command
       connection.call
     end
@@ -15,7 +11,7 @@ RSpec.describe StatusCheck::Services::BaseService do
     let(:status_block) { -> { true } }
 
     it 'returns success' do
-      expect(service_response(status_block)).to eq({name: 'test', success: true, status: 'OK'})
+      expect(service_response(status_block)).to eq({success: true, status: 'OK'})
     end
   end
 
@@ -23,7 +19,7 @@ RSpec.describe StatusCheck::Services::BaseService do
     let(:status_block) { -> { false } }
 
     it 'returns fail with default message' do
-      expect(service_response(status_block)).to eq({name: 'test', success: false, status: 'FAILED'})
+      expect(service_response(status_block)).to eq({success: false, status: 'FAILED'})
     end
   end
 
@@ -31,7 +27,7 @@ RSpec.describe StatusCheck::Services::BaseService do
     let(:status_block) { -> { raise 'eeee' } }
 
     it 'returns fail with exception' do
-      expect(service_response(status_block)).to eq({name: 'test', success: false, status: 'eeee'})
+      expect(service_response(status_block)).to eq({success: false, status: 'eeee'})
     end
   end
 
