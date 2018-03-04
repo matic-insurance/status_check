@@ -1,8 +1,8 @@
-require_relative 'base_service'
+require_relative 'abstract'
 
 module StatusCheck
   module Services
-    class BlockResult < BaseService
+    class BlockResult < Abstract
       def command
         !!connection.call
       end

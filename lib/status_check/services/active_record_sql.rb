@@ -1,6 +1,6 @@
 module StatusCheck
   module Services
-    class ActiveRecordSql < BaseService
+    class ActiveRecordSql < Abstract
       def command
         connection.call.execute("SELECT 1;")
         true

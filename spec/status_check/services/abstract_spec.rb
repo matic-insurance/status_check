@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-RSpec.describe StatusCheck::Services::BaseService do
-  class TestService < StatusCheck::Services::BaseService
+RSpec.describe StatusCheck::Services::Abstract do
+  class TestService < StatusCheck::Services::Abstract
     def command
       connection.call
     end

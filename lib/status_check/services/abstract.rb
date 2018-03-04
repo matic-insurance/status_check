@@ -1,6 +1,6 @@
 module StatusCheck
   module Services
-    class BaseService
+    class Abstract
       attr_reader :connection
 
       def initialize(connection)
