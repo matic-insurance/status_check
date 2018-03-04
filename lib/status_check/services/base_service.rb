@@ -27,10 +27,7 @@ module StatusCheck
       private
 
       def status_hash(command_result, exception = nil)
-        {
-          success: !!command_result,
-          status: status_message(command_result, exception)
-        }
+        [!!command_result, status_message(command_result, exception)]
       end
     end
   end

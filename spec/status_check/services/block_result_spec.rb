@@ -5,7 +5,7 @@ RSpec.describe StatusCheck::Services::BlockResult do
     let(:status_block) { -> { true } }
 
     it 'returns success' do
-      expect(service_response(status_block)).to eq({success: true, status: 'OK'})
+      expect(service_response(status_block)).to eq([true, 'OK'])
     end
   end
 
@@ -13,7 +13,7 @@ RSpec.describe StatusCheck::Services::BlockResult do
     let(:status_block) { -> { false } }
 
     it 'returns fail with default message' do
-      expect(service_response(status_block)).to eq({success: false, status: 'FAILED'})
+      expect(service_response(status_block)).to eq([false, 'FAILED'])
     end
   end
 
@@ -21,7 +21,7 @@ RSpec.describe StatusCheck::Services::BlockResult do
     let(:status_block) { -> { raise 'eeee' } }
 
     it 'returns fail with exception' do
-      expect(service_response(status_block)).to eq({success: false, status: 'eeee'})
+      expect(service_response(status_block)).to eq([false, 'eeee'])
     end
   end
 

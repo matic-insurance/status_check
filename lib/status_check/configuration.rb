@@ -25,9 +25,6 @@ module StatusCheck
       unless service.respond_to?(:report_status)
         raise Errors::NotValidParams, "Service #{service.class} should respond to report_status"
       end
-      unless service.report_status.is_a?(Hash)
-        raise Errors::NotValidParams, "Service #{service.class} should report status via hash"
-      end
     end
   end
 end

@@ -47,20 +47,6 @@ RSpec.describe StatusCheck::Configuration do
       end
     end
 
-    describe 'with class that not report status' do
-      class TestCheckInvalid3
-        def initialize(_)
-        end
-
-        def report_status
-        end
-      end
-
-      it 'reports exception' do
-        expect { add_check(TestCheckInvalid3) }.to raise_error(StatusCheck::Errors::NotValidParams)
-      end
-    end
-
     protected
 
     def add_check(service_class)
