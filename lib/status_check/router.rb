@@ -3,9 +3,9 @@ module StatusCheck
     module_function
 
     def call(hash)
-      response = Services.check_all
-      status = response.map { |service| service[:success] }.all? ? 200 : 503
-      [status, {}, [JSON.dump(response)]]
+      result, report = ::StatusCheck.verify
+      status = result ? 200 : 503
+      [status, {}, [JSON.dump(report)]]
     end
   end
 end

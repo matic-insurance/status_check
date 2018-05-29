@@ -1,12 +1,9 @@
 module StatusCheck
   module Services
-    class Redis < BaseService
+    class Redis < Abstract
       def command
         connection.call.get("1")
-      end
-
-      def name
-        :redis
+        true
       end
     end
   end
