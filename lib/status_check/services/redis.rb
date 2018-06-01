@@ -1,3 +1,5 @@
+require_relative 'abstract'
+
 module StatusCheck
   module Services
     class Redis < Abstract
